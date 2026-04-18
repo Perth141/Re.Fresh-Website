@@ -74,7 +74,11 @@
         }
         .nav-logo:hover { transform: scale(1.05); }
         .nav-logo-img {
-            height:48px; width:auto; object-fit:contain;
+            height:44px;
+            width:auto;
+            max-width:160px;
+            object-fit:contain;
+            padding: 2px 0;
         }
         .nav-links {
             display:flex; gap:1.2rem; list-style:none; align-items:center;
@@ -95,8 +99,9 @@
         .nav-links a.active-link::after { width:100%; }
         .nav-cta {
             background:var(--primary-green)!important; color:var(--white)!important;
-            padding:8px 20px; border-radius:25px; font-weight:600!important;
+            padding:10px 32px; border-radius:25px; font-weight:600!important;
             transition:all 0.3s!important;
+            letter-spacing: 0.5px;
         }
         .nav-cta:hover {
             background:var(--light-green)!important;
