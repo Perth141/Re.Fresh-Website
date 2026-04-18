@@ -6,367 +6,298 @@
     <title>Re.Fresh Thailand - Premium Smoothie, Zero Waste</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&family=Prompt:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-green: #2D6A4F;
-            --light-green: #52B788;
-            --accent-green: #95D5B2;
-            --soft-green: #D8F3DC;
-            --warm-orange: #E76F51;
-            --soft-orange: #F4A261;
-            --dark-text: #1B4332;
-            --body-text: #2D3436;
-            --white: #FFFFFF;
-            --bg-main: #F0F7F4;
-            --shadow: 0 10px 40px rgba(45,106,79,0.12);
-            --shadow-hover: 0 20px 60px rgba(45,106,79,0.2);
+        :root{--primary-green:#2D6A4F;--light-green:#52B788;--accent-green:#95D5B2;--soft-green:#D8F3DC;--warm-orange:#E76F51;--soft-orange:#F4A261;--dark-text:#1B4332;--body-text:#2D3436;--white:#FFFFFF;--bg-main:#F0F7F4;--shadow:0 10px 40px rgba(45,106,79,0.12);--shadow-hover:0 20px 60px rgba(45,106,79,0.2)}
+        *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Sarabun',sans-serif;background:var(--bg-main);color:var(--body-text);line-height:1.8;overflow-x:hidden}
+        .bg-decoration{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+        .bg-circle{position:absolute;border-radius:50%;opacity:0.05;animation:floatBubble 20s infinite ease-in-out}
+        .bg-circle:nth-child(1){width:400px;height:400px;background:var(--light-green);top:-100px;right:-100px}
+        .bg-circle:nth-child(2){width:300px;height:300px;background:var(--soft-orange);bottom:10%;left:-80px;animation-delay:-7s}
+        .bg-circle:nth-child(3){width:200px;height:200px;background:var(--accent-green);top:40%;right:5%;animation-delay:-14s}
+        @keyframes floatBubble{0%,100%{transform:translateY(0) scale(1)}33%{transform:translateY(-30px) scale(1.05)}66%{transform:translateY(20px) scale(0.95)}}
+        .reading-progress{position:fixed;top:70px;left:0;height:3px;background:linear-gradient(90deg,var(--light-green),var(--primary-green));z-index:1001;transition:width 0.1s;width:0}
+        .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(45,106,79,0.08);transition:all 0.4s ease}
+        .navbar.scrolled{background:rgba(255,255,255,0.96);box-shadow:0 4px 30px rgba(0,0,0,0.08)}
+        .nav-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:70px;padding:0 2rem}
+        .nav-logo{text-decoration:none;display:flex;align-items:center;transition:transform 0.3s}
+        .nav-logo:hover{transform:scale(1.05)}
+        .nav-logo-img{height:44px;width:auto;max-width:180px;object-fit:contain;padding:2px 0}
+        .nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center}
+        .nav-links a{text-decoration:none;color:var(--dark-text);font-weight:500;font-size:0.92rem;transition:color 0.3s;position:relative;padding:4px 0}
+        .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--light-green);transition:width 0.3s}
+        .nav-links a:hover::after{width:100%}.nav-links a:hover{color:var(--primary-green)}
+        .nav-links a.active-link{color:var(--primary-green);font-weight:700}.nav-links a.active-link::after{width:100%}
+        .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px}
+        .hamburger span{width:25px;height:2.5px;background:var(--primary-green);border-radius:2px;transition:0.3s}
+        .page{display:none}.page.active{display:block}
+        .btn-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--primary-green),var(--light-green));color:var(--white);padding:14px 32px;border-radius:50px;text-decoration:none;font-weight:700;font-size:1rem;transition:all 0.3s;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(45,106,79,0.3)}
+        .btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(45,106,79,0.4)}
+        .btn-secondary{display:inline-flex;align-items:center;gap:8px;background:var(--white);color:var(--primary-green);padding:14px 32px;border-radius:50px;text-decoration:none;font-weight:700;font-size:1rem;transition:all 0.3s;border:2px solid var(--accent-green);cursor:pointer}
+        .btn-secondary:hover{background:var(--soft-green);transform:translateY(-3px)}
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+        .hero-logo-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:2rem;animation:fadeInDown 0.8s ease-out}
+        .hero-logo{height:150px;width:auto;max-width:400px;object-fit:contain;margin-bottom:0.8rem;filter:drop-shadow(0 10px 30px rgba(45,106,79,0.15))}
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.8);backdrop-filter:blur(10px);padding:8px 20px;border-radius:50px;font-size:0.85rem;font-weight:600;color:var(--primary-green);border:1px solid rgba(82,183,136,0.2)}
+        .page-logo{height:100px;width:auto;max-width:80%;object-fit:contain;margin-bottom:1.5rem;filter:drop-shadow(0 8px 25px rgba(45,106,79,0.12))}
+        .menu-page-logo{height:90px;width:auto;max-width:80%;object-fit:contain;margin-bottom:1rem;filter:drop-shadow(0 6px 20px rgba(45,106,79,0.12))}
+        .article-hero-logo{height:80px;width:auto;max-width:70%;object-fit:contain;margin-bottom:1rem;filter:drop-shadow(0 6px 20px rgba(45,106,79,0.15));position:relative;z-index:1}
+        .footer-logo-img{height:60px;width:auto;max-width:200px;object-fit:contain;margin-bottom:1rem;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.2))}
+        .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 2rem 100px;overflow:hidden}
+        .hero-bg{position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(160deg,var(--soft-green) 0%,var(--bg-main) 40%,#FEFCFB 100%);z-index:0}
+        .hero-content{position:relative;z-index:2;max-width:900px;text-align:center}
+        .hero-title{font-family:'Prompt',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:800;color:var(--dark-text);line-height:1.3;margin-bottom:1.5rem;animation:fadeInUp 0.8s ease-out 0.2s both}
+        .highlight{background:linear-gradient(135deg,var(--light-green),var(--primary-green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .highlight-orange{background:linear-gradient(135deg,var(--warm-orange),var(--soft-orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .hero-subtitle{font-size:clamp(1rem,2vw,1.2rem);color:#555;max-width:650px;margin:0 auto 2.5rem;line-height:1.9;animation:fadeInUp 0.8s ease-out 0.4s both}
+        .hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeInUp 0.8s ease-out 0.6s both}
+        .hero-stats{display:flex;justify-content:center;gap:3rem;margin-top:3.5rem;animation:fadeInUp 0.8s ease-out 0.8s both}
+        .stat-item{text-align:center}.stat-number{font-family:'Prompt',sans-serif;font-size:2rem;font-weight:800;color:var(--primary-green)}.stat-label{font-size:0.85rem;color:#777;font-weight:500}
+        .hero-wave{position:absolute;bottom:0;left:0;right:0;z-index:2}
+        .menu-page{padding:100px 2rem 60px}.menu-page-inner{max-width:1100px;margin:0 auto}
+        .menu-page-header{text-align:center;margin-bottom:3rem}
+        .menu-page-title{font-family:'Prompt',sans-serif;font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;color:var(--dark-text);margin-bottom:0.5rem}
+        .menu-page-sub{color:#777;font-size:1rem}
+        .menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem}
+        .menu-card{background:var(--white);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);transition:all 0.3s;border:1px solid rgba(82,183,136,0.08)}
+        .menu-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-hover)}
+        .menu-card-img-wrap{width:100%;height:180px;overflow:hidden;background:linear-gradient(135deg,var(--soft-green),#E8F5E9)}
+        .menu-card-img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s}
+        .menu-card:hover .menu-card-img{transform:scale(1.08)}
+        .menu-card-body{padding:1.2rem 1.5rem 1.5rem;text-align:center}
+        .menu-card-body h3{font-family:'Prompt',sans-serif;font-size:1.05rem;font-weight:700;color:var(--primary-green);margin-bottom:0.3rem}
+        .menu-card-body p{font-size:0.85rem;color:#888;margin-bottom:0.75rem}
+        .price{display:inline-block;background:var(--soft-green);color:var(--primary-green);padding:5px 16px;border-radius:20px;font-weight:700;font-size:0.95rem}
+        .about-page{padding:100px 2rem 60px}.about-inner{max-width:800px;margin:0 auto}
+        .about-hero-text{text-align:center;margin-bottom:3rem}
+        .about-hero-text h1{font-family:'Prompt',sans-serif;font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;color:var(--dark-text);margin-bottom:1rem}
+        .about-hero-text p{color:#555;font-size:1.1rem;line-height:1.9;max-width:600px;margin:0 auto}
+        .about-cards{display:flex;flex-direction:column;gap:1.5rem}
+        .about-card{background:var(--white);border-radius:20px;padding:2rem;box-shadow:var(--shadow);transition:all 0.3s}
+        .about-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+        .about-card .card-emoji{font-size:2.2rem;margin-bottom:0.75rem}
+        .about-card h3{font-family:'Prompt',sans-serif;font-size:1.1rem;font-weight:700;color:var(--primary-green);margin-bottom:0.5rem}
+        .about-card p{font-size:0.95rem;color:#555;line-height:1.8}
+        .article-page{padding:100px 2rem 60px}.article-container{max-width:860px;margin:0 auto}
+        .article-hero{background:linear-gradient(135deg,var(--soft-green),#B7E4C7);border-radius:28px;padding:3.5rem 3rem;text-align:center;margin-bottom:2.5rem;position:relative;overflow:hidden}
+        .article-hero::after{content:'';position:absolute;top:-40%;right:-10%;width:300px;height:300px;background:rgba(255,255,255,0.12);border-radius:50%}
+        .article-hero h1{font-family:'Prompt',sans-serif;font-size:clamp(1.4rem,3.5vw,2rem);font-weight:800;color:var(--dark-text);line-height:1.4;position:relative;z-index:1}
+        .article-hero .article-meta{margin-top:1rem;font-size:0.9rem;color:var(--primary-green);font-weight:500;position:relative;z-index:1}
+        .article-section{background:var(--white);border-radius:24px;padding:2.5rem 3rem;margin-bottom:1.5rem;box-shadow:var(--shadow);transition:transform 0.3s,box-shadow 0.3s;opacity:0;transform:translateY(30px)}
+        .article-section.visible{opacity:1;transform:translateY(0);transition:opacity 0.6s ease-out,transform 0.6s ease-out}
+        .article-section:hover{box-shadow:var(--shadow-hover)}
+        .section-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
+        .section-icon{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:14px;font-size:1.4rem;flex-shrink:0}
+        .section-icon.green{background:linear-gradient(135deg,var(--soft-green),var(--accent-green))}
+        .section-icon.orange{background:linear-gradient(135deg,#FDE8D0,#FDCFA1)}
+        .section-icon.blue{background:linear-gradient(135deg,#DBEAFE,#93C5FD)}
+        .section-icon.purple{background:linear-gradient(135deg,#EDE9FE,#C4B5FD)}
+        .section-title{font-family:'Prompt',sans-serif;font-size:clamp(1.2rem,2.5vw,1.6rem);font-weight:700;color:var(--dark-text);line-height:1.4}
+        .section-subtitle{font-family:'Prompt',sans-serif;font-size:0.95rem;font-weight:500;color:var(--light-green);margin-top:3px}
+        .article-text{font-size:1.05rem;line-height:2;color:var(--body-text)}.article-text strong{color:var(--primary-green)}
+        .highlight-box{background:linear-gradient(135deg,var(--soft-green),#E8F5E9);border-left:5px solid var(--light-green);border-radius:0 16px 16px 0;padding:1.5rem 2rem;margin:1.5rem 0}
+        .highlight-box p{font-size:1.05rem;color:var(--dark-text);line-height:1.9}
+        .stat-highlight{display:inline-flex;align-items:center;background:linear-gradient(135deg,var(--warm-orange),var(--soft-orange));color:var(--white);padding:4px 16px;border-radius:20px;font-weight:700;font-size:1rem}
+        .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:1.5rem}
+        .feature-card{background:linear-gradient(145deg,#FAFFFE,var(--soft-green));border-radius:20px;padding:2rem;border:1px solid rgba(82,183,136,0.15);transition:all 0.3s}
+        .feature-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(45,106,79,0.12)}
+        .feature-card .card-emoji{font-size:2.2rem;margin-bottom:0.75rem}
+        .feature-card h3{font-family:'Prompt',sans-serif;font-size:1.05rem;font-weight:700;color:var(--primary-green);margin-bottom:0.5rem}
+        .feature-card p{font-size:0.9rem;color:#555;line-height:1.8}
+        .quote-section{background:linear-gradient(135deg,var(--primary-green),#1B4332);color:var(--white);border-radius:24px;padding:3rem;text-align:center;position:relative;overflow:hidden}
+        .quote-section::before{content:'"';position:absolute;top:-20px;left:30px;font-size:10rem;font-family:Georgia,serif;opacity:0.1;color:var(--white)}
+        .quote-text{font-size:clamp(1rem,2.2vw,1.25rem);font-style:italic;line-height:1.8;max-width:600px;margin:0 auto 1.5rem;position:relative;z-index:1}
+        .quote-author{font-family:'Prompt',sans-serif;font-weight:600;font-size:1rem;color:var(--accent-green)}
+        .quote-role{font-size:0.85rem;color:rgba(255,255,255,0.6);margin-top:4px}
+        .tags-container{display:flex;flex-wrap:wrap;gap:10px;margin-top:1.5rem}
+        .tag{display:inline-block;background:var(--soft-green);color:var(--primary-green);padding:6px 16px;border-radius:20px;font-size:0.82rem;font-weight:600;transition:all 0.3s;cursor:default}
+        .tag:hover{background:var(--primary-green);color:var(--white);transform:translateY(-2px)}
+        .tag.orange{background:#FDE8D0;color:var(--warm-orange)}.tag.orange:hover{background:var(--warm-orange);color:var(--white)}
+        .cta-section{background:linear-gradient(135deg,var(--soft-green),#B7E4C7,var(--accent-green));border-radius:24px;padding:3rem;text-align:center;position:relative;overflow:hidden}
+        .cta-section::after{content:'';position:absolute;top:-50%;right:-20%;width:300px;height:300px;background:rgba(255,255,255,0.15);border-radius:50%}
+        .cta-section h2{font-family:'Prompt',sans-serif;font-size:clamp(1.3rem,3vw,1.8rem);font-weight:800;color:var(--dark-text);margin-bottom:1rem;position:relative;z-index:1}
+        .cta-section p{font-size:1rem;color:var(--primary-green);max-width:500px;margin:0 auto 2rem;line-height:1.8;position:relative;z-index:1}
+        .cta-section .btn-primary{position:relative;z-index:1}
+        .find-page{padding:100px 2rem 60px}.find-inner{max-width:700px;margin:0 auto;text-align:center}
+        .find-inner h1{font-family:'Prompt',sans-serif;font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;color:var(--dark-text);margin-bottom:0.5rem}
+        .find-inner .find-sub{color:#777;font-size:1rem;margin-bottom:2.5rem}
+        .find-search-box{display:flex;gap:0.75rem;max-width:500px;margin:0 auto 1.5rem;flex-wrap:wrap;justify-content:center}
+        .find-search-box input{flex:1;min-width:200px;padding:14px 20px;border:2px solid var(--accent-green);border-radius:50px;font-size:1rem;font-family:'Sarabun',sans-serif;outline:none;transition:border-color 0.3s}
+        .find-search-box input:focus{border-color:var(--primary-green)}
+        .find-search-box button{padding:14px 28px;border-radius:50px;border:none;background:linear-gradient(135deg,var(--primary-green),var(--light-green));color:var(--white);font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s}
+        .find-search-box button:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(45,106,79,0.3)}
+        .use-location{display:inline-flex;align-items:center;gap:6px;color:var(--primary-green);font-weight:600;font-size:0.9rem;cursor:pointer;background:none;border:none;font-family:'Sarabun',sans-serif}
+        .use-location:hover{color:var(--light-green)}
+        .find-map-placeholder{margin-top:2.5rem;background:var(--white);border-radius:20px;height:300px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);color:#aaa;font-size:1.1rem}
+        .contact-page{padding:100px 2rem 60px}.contact-inner{max-width:600px;margin:0 auto;text-align:center}
+        .contact-inner h1{font-family:'Prompt',sans-serif;font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;color:var(--dark-text);margin-bottom:1rem}
+        .contact-cards{display:flex;flex-direction:column;gap:1rem;margin-top:2rem}
+        .contact-card{background:var(--white);border-radius:16px;padding:1.5rem 2rem;display:flex;align-items:center;gap:1rem;box-shadow:var(--shadow);transition:all 0.3s}
+        .contact-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+        .contact-card .c-info{text-align:left}.contact-card .c-info h3{font-family:'Prompt',sans-serif;font-size:1rem;font-weight:700;color:var(--primary-green)}.contact-card .c-info p{font-size:0.9rem;color:#666}
+        .social-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform 0.3s}
+        .contact-card:hover .social-icon{transform:scale(1.1)}
+        .social-icon img{width:100%;height:100%;object-fit:contain}
+        .social-icon.facebook{background:#1877F2;padding:8px}.social-icon.instagram{background:linear-gradient(135deg,#F58529,#DD2A7B,#8134AF,#515BD4);padding:8px}.social-icon.tiktok{background:#010101;padding:8px}.social-icon.line{background:#06C755;padding:8px}.social-icon.email{background:var(--white);padding:6px;border:2px solid #eee}
+        .footer-social{display:flex;justify-content:center;gap:1rem;margin:1.5rem 0}
+        .footer-social a{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s;opacity:0.7}
+        .footer-social a:hover{opacity:1;transform:translateY(-3px)}
+        .footer-social a img{width:24px;height:24px;object-fit:contain}
+        .footer-social a.fb{background:#1877F2}.footer-social a.ig{background:linear-gradient(135deg,#F58529,#DD2A7B,#8134AF)}.footer-social a.tt{background:#010101}.footer-social a.ln{background:#06C755}.footer-social a.em{background:rgba(255,255,255,0.15)}
+        footer{background:var(--dark-text);color:rgba(255,255,255,0.7);text-align:center;padding:3rem 2rem;position:relative;z-index:1}
+        .footer-links{display:flex;justify-content:center;gap:2rem;margin:1.5rem 0;flex-wrap:wrap}
+        .footer-links a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.9rem;transition:color 0.3s}.footer-links a:hover{color:var(--accent-green)}
+        .footer-copy{font-size:0.8rem;opacity:0.5;margin-top:1rem}
+        .scroll-top{position:fixed;bottom:30px;right:30px;width:50px;height:50px;background:var(--primary-green);color:var(--white);border:none;border-radius:50%;font-size:1.2rem;cursor:pointer;opacity:0;visibility:hidden;transition:all 0.3s;z-index:999;box-shadow:0 4px 15px rgba(45,106,79,0.3);display:flex;align-items:center;justify-content:center}
+        .scroll-top.show{opacity:1;visibility:visible}.scroll-top:hover{background:var(--light-green);transform:translateY(-3px)}
+        @media(max-width:768px){
+            .nav-links{display:none;position:absolute;top:70px;left:0;right:0;background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);flex-direction:column;padding:1.5rem;gap:1rem;box-shadow:0 10px 30px rgba(0,0,0,0.1);border-radius:0 0 20px 20px}
+            .nav-links.active{display:flex}.hamburger{display:flex}.nav-logo-img{height:36px;max-width:140px}
+            .hero{min-height:auto;padding:120px 1.5rem 60px}.hero-logo{height:110px;max-width:300px}.page-logo{height:80px}.menu-page-logo{height:70px}.article-hero-logo{height:60px}.footer-logo-img{height:45px}
+            .hero-stats{gap:1.5rem}.stat-number{font-size:1.5rem}
+            .article-section{padding:2rem 1.5rem;border-radius:20px}.article-hero{padding:2.5rem 1.5rem}.quote-section{padding:2rem 1.5rem}.cta-section{padding:2rem 1.5rem}
+            .feature-grid{grid-template-columns:1fr}.section-header{flex-direction:column;align-items:flex-start;gap:0.75rem}
+            .menu-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem}.menu-card-img-wrap{height:130px}
         }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family:'Sarabun',sans-serif; background:var(--bg-main); color:var(--body-text); line-height:1.8; overflow-x:hidden; }
-        .bg-decoration { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; overflow:hidden; }
-        .bg-circle { position:absolute; border-radius:50%; opacity:0.05; animation:floatBubble 20s infinite ease-in-out; }
-        .bg-circle:nth-child(1) { width:400px; height:400px; background:var(--light-green); top:-100px; right:-100px; }
-        .bg-circle:nth-child(2) { width:300px; height:300px; background:var(--soft-orange); bottom:10%; left:-80px; animation-delay:-7s; }
-        .bg-circle:nth-child(3) { width:200px; height:200px; background:var(--accent-green); top:40%; right:5%; animation-delay:-14s; }
-        @keyframes floatBubble { 0%,100%{transform:translateY(0) scale(1)} 33%{transform:translateY(-30px) scale(1.05)} 66%{transform:translateY(20px) scale(0.95)} }
-        .reading-progress { position:fixed; top:70px; left:0; height:3px; background:linear-gradient(90deg,var(--light-green),var(--primary-green)); z-index:1001; transition:width 0.1s; width:0; }
-        .navbar { position:fixed; top:0; left:0; right:0; z-index:1000; background:rgba(255,255,255,0.88); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-bottom:1px solid rgba(45,106,79,0.08); transition:all 0.4s ease; }
-        .navbar.scrolled { background:rgba(255,255,255,0.96); box-shadow:0 4px 30px rgba(0,0,0,0.08); }
-        .nav-content { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; height:70px; padding:0 2rem; }
-        .nav-logo { text-decoration:none; display:flex; align-items:center; transition:transform 0.3s; }
-        .nav-logo:hover { transform:scale(1.05); }
-        .nav-logo-img { height:44px; width:auto; max-width:180px; object-fit:contain; padding:2px 0; }
-        .nav-links { display:flex; gap:1.2rem; list-style:none; align-items:center; }
-        .nav-links a { text-decoration:none; color:var(--dark-text); font-weight:500; font-size:0.92rem; transition:color 0.3s; position:relative; padding:4px 0; }
-        .nav-links a::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:var(--light-green); transition:width 0.3s; }
-        .nav-links a:hover::after { width:100%; }
-        .nav-links a:hover { color:var(--primary-green); }
-        .nav-links a.active-link { color:var(--primary-green); font-weight:700; }
-        .nav-links a.active-link::after { width:100%; }
-        .nav-cta { background:var(--primary-green)!important; color:var(--white)!important; padding:10px 32px; border-radius:25px; font-weight:600!important; transition:all 0.3s!important; letter-spacing:0.5px; }
-        .nav-cta:hover { background:var(--light-green)!important; transform:translateY(-2px); box-shadow:0 4px 15px rgba(82,183,136,0.4); }
-        .nav-cta::after { display:none!important; }
-        .hamburger { display:none; flex-direction:column; cursor:pointer; gap:5px; }
-        .hamburger span { width:25px; height:2.5px; background:var(--primary-green); border-radius:2px; transition:0.3s; }
-        .page { display:none; } .page.active { display:block; }
-        .btn-primary { display:inline-flex; align-items:center; gap:8px; background:linear-gradient(135deg,var(--primary-green),var(--light-green)); color:var(--white); padding:14px 32px; border-radius:50px; text-decoration:none; font-weight:700; font-size:1rem; transition:all 0.3s; border:none; cursor:pointer; box-shadow:0 4px 20px rgba(45,106,79,0.3); }
-        .btn-primary:hover { transform:translateY(-3px); box-shadow:0 8px 30px rgba(45,106,79,0.4); }
-        .btn-secondary { display:inline-flex; align-items:center; gap:8px; background:var(--white); color:var(--primary-green); padding:14px 32px; border-radius:50px; text-decoration:none; font-weight:700; font-size:1rem; transition:all 0.3s; border:2px solid var(--accent-green); cursor:pointer; }
-        .btn-secondary:hover { background:var(--soft-green); transform:translateY(-3px); }
-        @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-        @keyframes fadeInDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
-        .hero-logo { height:150px; width:auto; max-width:90%; object-fit:contain; margin-bottom:2rem; filter:drop-shadow(0 10px 30px rgba(45,106,79,0.15)); animation:fadeInDown 0.8s ease-out; }
-        .page-logo { height:100px; width:auto; max-width:80%; object-fit:contain; margin-bottom:1.5rem; filter:drop-shadow(0 8px 25px rgba(45,106,79,0.12)); }
-        .menu-page-logo { height:90px; width:auto; max-width:80%; object-fit:contain; margin-bottom:1rem; filter:drop-shadow(0 6px 20px rgba(45,106,79,0.12)); }
-        .article-hero-logo { height:80px; width:auto; max-width:70%; object-fit:contain; margin-bottom:1rem; filter:drop-shadow(0 6px 20px rgba(45,106,79,0.15)); position:relative; z-index:1; }
-        .footer-logo-img { height:60px; width:auto; max-width:200px; object-fit:contain; margin-bottom:1rem; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.2)); }
-        .hero { position:relative; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:120px 2rem 100px; overflow:hidden; }
-        .hero-bg { position:absolute; top:0; left:0; right:0; bottom:0; background:linear-gradient(160deg,var(--soft-green) 0%,var(--bg-main) 40%,#FEFCFB 100%); z-index:0; }
-        .hero-content { position:relative; z-index:2; max-width:900px; text-align:center; }
-        .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.8); backdrop-filter:blur(10px); padding:8px 20px; border-radius:50px; font-size:0.85rem; font-weight:600; color:var(--primary-green); margin-bottom:2rem; border:1px solid rgba(82,183,136,0.2); animation:fadeInDown 0.8s ease-out 0.1s both; }
-        .hero-title { font-family:'Prompt',sans-serif; font-size:clamp(2rem,5vw,3.5rem); font-weight:800; color:var(--dark-text); line-height:1.3; margin-bottom:1.5rem; animation:fadeInUp 0.8s ease-out 0.2s both; }
-        .highlight { background:linear-gradient(135deg,var(--light-green),var(--primary-green)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-        .highlight-orange { background:linear-gradient(135deg,var(--warm-orange),var(--soft-orange)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-        .hero-subtitle { font-size:clamp(1rem,2vw,1.2rem); color:#555; max-width:650px; margin:0 auto 2.5rem; line-height:1.9; animation:fadeInUp 0.8s ease-out 0.4s both; }
-        .hero-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; animation:fadeInUp 0.8s ease-out 0.6s both; }
-        .hero-stats { display:flex; justify-content:center; gap:3rem; margin-top:3.5rem; animation:fadeInUp 0.8s ease-out 0.8s both; }
-        .stat-item { text-align:center; }
-        .stat-number { font-family:'Prompt',sans-serif; font-size:2rem; font-weight:800; color:var(--primary-green); }
-        .stat-label { font-size:0.85rem; color:#777; font-weight:500; }
-        .hero-wave { position:absolute; bottom:0; left:0; right:0; z-index:2; }
-        .menu-page { padding:100px 2rem 60px; } .menu-page-inner { max-width:1100px; margin:0 auto; }
-        .menu-page-header { text-align:center; margin-bottom:3rem; }
-        .menu-page-title { font-family:'Prompt',sans-serif; font-size:clamp(1.8rem,4vw,2.5rem); font-weight:800; color:var(--dark-text); margin-bottom:0.5rem; }
-        .menu-page-sub { color:#777; font-size:1rem; }
-        .menu-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1.5rem; }
-        .menu-card { background:var(--white); border-radius:20px; overflow:hidden; box-shadow:var(--shadow); transition:all 0.3s; border:1px solid rgba(82,183,136,0.08); }
-        .menu-card:hover { transform:translateY(-8px); box-shadow:var(--shadow-hover); }
-        .menu-card-img-wrap { width:100%; height:180px; overflow:hidden; background:linear-gradient(135deg,var(--soft-green),#E8F5E9); }
-        .menu-card-img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s; }
-        .menu-card:hover .menu-card-img { transform:scale(1.08); }
-        .menu-card-body { padding:1.2rem 1.5rem 1.5rem; text-align:center; }
-        .menu-card-body h3 { font-family:'Prompt',sans-serif; font-size:1.05rem; font-weight:700; color:var(--primary-green); margin-bottom:0.3rem; }
-        .menu-card-body p { font-size:0.85rem; color:#888; margin-bottom:0.75rem; }
-        .price { display:inline-block; background:var(--soft-green); color:var(--primary-green); padding:5px 16px; border-radius:20px; font-weight:700; font-size:0.95rem; }
-        .about-page { padding:100px 2rem 60px; } .about-inner { max-width:800px; margin:0 auto; }
-        .about-hero-text { text-align:center; margin-bottom:3rem; }
-        .about-hero-text h1 { font-family:'Prompt',sans-serif; font-size:clamp(1.8rem,4vw,2.5rem); font-weight:800; color:var(--dark-text); margin-bottom:1rem; }
-        .about-hero-text p { color:#555; font-size:1.1rem; line-height:1.9; max-width:600px; margin:0 auto; }
-        .about-cards { display:flex; flex-direction:column; gap:1.5rem; }
-        .about-card { background:var(--white); border-radius:20px; padding:2rem; box-shadow:var(--shadow); transition:all 0.3s; }
-        .about-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
-        .about-card .card-emoji { font-size:2.2rem; margin-bottom:0.75rem; }
-        .about-card h3 { font-family:'Prompt',sans-serif; font-size:1.1rem; font-weight:700; color:var(--primary-green); margin-bottom:0.5rem; }
-        .about-card p { font-size:0.95rem; color:#555; line-height:1.8; }
-        .article-page { padding:100px 2rem 60px; } .article-container { max-width:860px; margin:0 auto; }
-        .article-hero { background:linear-gradient(135deg,var(--soft-green),#B7E4C7); border-radius:28px; padding:3.5rem 3rem; text-align:center; margin-bottom:2.5rem; position:relative; overflow:hidden; }
-        .article-hero::after { content:''; position:absolute; top:-40%; right:-10%; width:300px; height:300px; background:rgba(255,255,255,0.12); border-radius:50%; }
-        .article-hero h1 { font-family:'Prompt',sans-serif; font-size:clamp(1.4rem,3.5vw,2rem); font-weight:800; color:var(--dark-text); line-height:1.4; position:relative; z-index:1; }
-        .article-hero .article-meta { margin-top:1rem; font-size:0.9rem; color:var(--primary-green); font-weight:500; position:relative; z-index:1; }
-        .article-section { background:var(--white); border-radius:24px; padding:2.5rem 3rem; margin-bottom:1.5rem; box-shadow:var(--shadow); transition:transform 0.3s,box-shadow 0.3s; opacity:0; transform:translateY(30px); }
-        .article-section.visible { opacity:1; transform:translateY(0); transition:opacity 0.6s ease-out,transform 0.6s ease-out; }
-        .article-section:hover { box-shadow:var(--shadow-hover); }
-        .section-header { display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; }
-        .section-icon { display:flex; align-items:center; justify-content:center; width:52px; height:52px; border-radius:14px; font-size:1.4rem; flex-shrink:0; }
-        .section-icon.green { background:linear-gradient(135deg,var(--soft-green),var(--accent-green)); }
-        .section-icon.orange { background:linear-gradient(135deg,#FDE8D0,#FDCFA1); }
-        .section-icon.blue { background:linear-gradient(135deg,#DBEAFE,#93C5FD); }
-        .section-icon.purple { background:linear-gradient(135deg,#EDE9FE,#C4B5FD); }
-        .section-title { font-family:'Prompt',sans-serif; font-size:clamp(1.2rem,2.5vw,1.6rem); font-weight:700; color:var(--dark-text); line-height:1.4; }
-        .section-subtitle { font-family:'Prompt',sans-serif; font-size:0.95rem; font-weight:500; color:var(--light-green); margin-top:3px; }
-        .article-text { font-size:1.05rem; line-height:2; color:var(--body-text); }
-        .article-text strong { color:var(--primary-green); }
-        .highlight-box { background:linear-gradient(135deg,var(--soft-green),#E8F5E9); border-left:5px solid var(--light-green); border-radius:0 16px 16px 0; padding:1.5rem 2rem; margin:1.5rem 0; }
-        .highlight-box p { font-size:1.05rem; color:var(--dark-text); line-height:1.9; }
-        .stat-highlight { display:inline-flex; align-items:center; background:linear-gradient(135deg,var(--warm-orange),var(--soft-orange)); color:var(--white); padding:4px 16px; border-radius:20px; font-weight:700; font-size:1rem; }
-        .feature-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.5rem; margin-top:1.5rem; }
-        .feature-card { background:linear-gradient(145deg,#FAFFFE,var(--soft-green)); border-radius:20px; padding:2rem; border:1px solid rgba(82,183,136,0.15); transition:all 0.3s; }
-        .feature-card:hover { transform:translateY(-5px); box-shadow:0 10px 30px rgba(45,106,79,0.12); }
-        .feature-card .card-emoji { font-size:2.2rem; margin-bottom:0.75rem; }
-        .feature-card h3 { font-family:'Prompt',sans-serif; font-size:1.05rem; font-weight:700; color:var(--primary-green); margin-bottom:0.5rem; }
-        .feature-card p { font-size:0.9rem; color:#555; line-height:1.8; }
-        .quote-section { background:linear-gradient(135deg,var(--primary-green),#1B4332); color:var(--white); border-radius:24px; padding:3rem; text-align:center; position:relative; overflow:hidden; }
-        .quote-section::before { content:'"'; position:absolute; top:-20px; left:30px; font-size:10rem; font-family:Georgia,serif; opacity:0.1; color:var(--white); }
-        .quote-text { font-size:clamp(1rem,2.2vw,1.25rem); font-style:italic; line-height:1.8; max-width:600px; margin:0 auto 1.5rem; position:relative; z-index:1; }
-        .quote-author { font-family:'Prompt',sans-serif; font-weight:600; font-size:1rem; color:var(--accent-green); }
-        .quote-role { font-size:0.85rem; color:rgba(255,255,255,0.6); margin-top:4px; }
-        .tags-container { display:flex; flex-wrap:wrap; gap:10px; margin-top:1.5rem; }
-        .tag { display:inline-block; background:var(--soft-green); color:var(--primary-green); padding:6px 16px; border-radius:20px; font-size:0.82rem; font-weight:600; transition:all 0.3s; cursor:default; }
-        .tag:hover { background:var(--primary-green); color:var(--white); transform:translateY(-2px); }
-        .tag.orange { background:#FDE8D0; color:var(--warm-orange); }
-        .tag.orange:hover { background:var(--warm-orange); color:var(--white); }
-        .cta-section { background:linear-gradient(135deg,var(--soft-green),#B7E4C7,var(--accent-green)); border-radius:24px; padding:3rem; text-align:center; position:relative; overflow:hidden; }
-        .cta-section::after { content:''; position:absolute; top:-50%; right:-20%; width:300px; height:300px; background:rgba(255,255,255,0.15); border-radius:50%; }
-        .cta-section h2 { font-family:'Prompt',sans-serif; font-size:clamp(1.3rem,3vw,1.8rem); font-weight:800; color:var(--dark-text); margin-bottom:1rem; position:relative; z-index:1; }
-        .cta-section p { font-size:1rem; color:var(--primary-green); max-width:500px; margin:0 auto 2rem; line-height:1.8; position:relative; z-index:1; }
-        .cta-section .btn-primary { position:relative; z-index:1; }
-        .find-page { padding:100px 2rem 60px; }
-        .find-inner { max-width:700px; margin:0 auto; text-align:center; }
-        .find-inner h1 { font-family:'Prompt',sans-serif; font-size:clamp(1.8rem,4vw,2.5rem); font-weight:800; color:var(--dark-text); margin-bottom:0.5rem; }
-        .find-inner .find-sub { color:#777; font-size:1rem; margin-bottom:2.5rem; }
-        .find-search-box { display:flex; gap:0.75rem; max-width:500px; margin:0 auto 1.5rem; flex-wrap:wrap; justify-content:center; }
-        .find-search-box input { flex:1; min-width:200px; padding:14px 20px; border:2px solid var(--accent-green); border-radius:50px; font-size:1rem; font-family:'Sarabun',sans-serif; outline:none; transition:border-color 0.3s; }
-        .find-search-box input:focus { border-color:var(--primary-green); }
-        .find-search-box button { padding:14px 28px; border-radius:50px; border:none; background:linear-gradient(135deg,var(--primary-green),var(--light-green)); color:var(--white); font-weight:700; font-size:1rem; cursor:pointer; transition:all 0.3s; }
-        .find-search-box button:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(45,106,79,0.3); }
-        .use-location { display:inline-flex; align-items:center; gap:6px; color:var(--primary-green); font-weight:600; font-size:0.9rem; cursor:pointer; background:none; border:none; font-family:'Sarabun',sans-serif; }
-        .use-location:hover { color:var(--light-green); }
-        .find-map-placeholder { margin-top:2.5rem; background:var(--white); border-radius:20px; height:300px; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow); color:#aaa; font-size:1.1rem; }
-        .contact-page { padding:100px 2rem 60px; }
-        .contact-inner { max-width:600px; margin:0 auto; text-align:center; }
-        .contact-inner h1 { font-family:'Prompt',sans-serif; font-size:clamp(1.8rem,4vw,2.5rem); font-weight:800; color:var(--dark-text); margin-bottom:1rem; }
-        .contact-cards { display:flex; flex-direction:column; gap:1rem; margin-top:2rem; }
-        .contact-card { background:var(--white); border-radius:16px; padding:1.5rem 2rem; display:flex; align-items:center; gap:1rem; box-shadow:var(--shadow); transition:all 0.3s; }
-        .contact-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
-        .contact-card .c-info { text-align:left; }
-        .contact-card .c-info h3 { font-family:'Prompt',sans-serif; font-size:1rem; font-weight:700; color:var(--primary-green); }
-        .contact-card .c-info p { font-size:0.9rem; color:#666; }
-        .social-icon { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:transform 0.3s; }
-        .contact-card:hover .social-icon { transform:scale(1.1); }
-        .social-icon img { width:100%; height:100%; object-fit:contain; }
-        .social-icon.facebook { background:#1877F2; padding:8px; }
-        .social-icon.instagram { background:linear-gradient(135deg,#F58529,#DD2A7B,#8134AF,#515BD4); padding:8px; }
-        .social-icon.tiktok { background:#010101; padding:8px; }
-        .social-icon.line { background:#06C755; padding:8px; }
-        .social-icon.email { background:var(--white); padding:6px; border:2px solid #eee; }
-        .footer-social { display:flex; justify-content:center; gap:1rem; margin:1.5rem 0; }
-        .footer-social a { width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:all 0.3s; opacity:0.7; }
-        .footer-social a:hover { opacity:1; transform:translateY(-3px); }
-        .footer-social a img { width:24px; height:24px; object-fit:contain; }
-        .footer-social a.fb { background:#1877F2; }
-        .footer-social a.ig { background:linear-gradient(135deg,#F58529,#DD2A7B,#8134AF); }
-        .footer-social a.tt { background:#010101; }
-        .footer-social a.ln { background:#06C755; }
-        .footer-social a.em { background:rgba(255,255,255,0.15); }
-        footer { background:var(--dark-text); color:rgba(255,255,255,0.7); text-align:center; padding:3rem 2rem; position:relative; z-index:1; }
-        .footer-links { display:flex; justify-content:center; gap:2rem; margin:1.5rem 0; flex-wrap:wrap; }
-        .footer-links a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.9rem; transition:color 0.3s; }
-        .footer-links a:hover { color:var(--accent-green); }
-        .footer-copy { font-size:0.8rem; opacity:0.5; margin-top:1rem; }
-        .scroll-top { position:fixed; bottom:30px; right:30px; width:50px; height:50px; background:var(--primary-green); color:var(--white); border:none; border-radius:50%; font-size:1.2rem; cursor:pointer; opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; box-shadow:0 4px 15px rgba(45,106,79,0.3); display:flex; align-items:center; justify-content:center; }
-        .scroll-top.show { opacity:1; visibility:visible; }
-        .scroll-top:hover { background:var(--light-green); transform:translateY(-3px); }
-        @media(max-width:768px) {
-            .nav-links { display:none; position:absolute; top:70px; left:0; right:0; background:rgba(255,255,255,0.98); backdrop-filter:blur(20px); flex-direction:column; padding:1.5rem; gap:1rem; box-shadow:0 10px 30px rgba(0,0,0,0.1); border-radius:0 0 20px 20px; }
-            .nav-links.active { display:flex; }
-            .hamburger { display:flex; }
-            .nav-logo-img { height:36px; max-width:140px; }
-            .hero { min-height:auto; padding:120px 1.5rem 60px; }
-            .hero-logo { height:110px; } .page-logo { height:80px; } .menu-page-logo { height:70px; } .article-hero-logo { height:60px; } .footer-logo-img { height:45px; }
-            .hero-stats { gap:1.5rem; } .stat-number { font-size:1.5rem; }
-            .article-section { padding:2rem 1.5rem; border-radius:20px; }
-            .article-hero { padding:2.5rem 1.5rem; } .quote-section { padding:2rem 1.5rem; } .cta-section { padding:2rem 1.5rem; }
-            .feature-grid { grid-template-columns:1fr; }
-            .section-header { flex-direction:column; align-items:flex-start; gap:0.75rem; }
-            .menu-grid { grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:1rem; }
-            .menu-card-img-wrap { height:130px; }
-        }
-        @media(max-width:480px) {
-            .hero-actions { flex-direction:column; align-items:center; }
-            .hero-stats { flex-direction:column; gap:1rem; }
-            .menu-grid { grid-template-columns:repeat(2,1fr); }
-            .hero-logo { height:90px; }
-        }
+        @media(max-width:480px){.hero-actions{flex-direction:column;align-items:center}.hero-stats{flex-direction:column;gap:1rem}.menu-grid{grid-template-columns:repeat(2,1fr)}.hero-logo{height:90px;max-width:250px}}
     </style>
 </head>
 <body>
     <div class="bg-decoration"><div class="bg-circle"></div><div class="bg-circle"></div><div class="bg-circle"></div></div>
     <div class="reading-progress" id="readingProgress"></div>
-    <nav class="navbar" id="navbar">
-        <div class="nav-content">
-            <a href="#" class="nav-logo" onclick="showPage('home')">
-                <img src="https://i.ibb.co/JjzcxZyL/Screenshot-2026-04-18-215658.png" alt="Re.Fresh" class="nav-logo-img">
-            </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#" onclick="showPage('home')" class="active-link" data-page="home">หน้าแรก</a></li>
-                <li><a href="#" onclick="showPage('about')" data-page="about">เกี่ยวกับ</a></li>
-                <li><a href="#" onclick="showPage('menu')" data-page="menu">เมนู</a></li>
-                <li><a href="#" onclick="showPage('article')" data-page="article">บทความ</a></li>
-                <li><a href="#" onclick="showPage('find')" data-page="find">ค้นหาร้าน</a></li>
-                <li><a href="#" onclick="showPage('contact')" data-page="contact">ติดต่อ</a></li>
-                <li><a href="#" onclick="showPage('menu')" class="nav-cta">สั่งเลย</a></li>
-            </ul>
-            <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+    <nav class="navbar" id="navbar"><div class="nav-content">
+        <a href="#" class="nav-logo" onclick="showPage('home')"><img src="https://i.ibb.co/JjzcxZyL/Screenshot-2026-04-18-215658.png" alt="Re.Fresh" class="nav-logo-img"></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#" onclick="showPage('home')" class="active-link" data-page="home">หน้าแรก</a></li>
+            <li><a href="#" onclick="showPage('about')" data-page="about">เกี่ยวกับ</a></li>
+            <li><a href="#" onclick="showPage('menu')" data-page="menu">เมนู</a></li>
+            <li><a href="#" onclick="showPage('article')" data-page="article">บทความ</a></li>
+            <li><a href="#" onclick="showPage('find')" data-page="find">ค้นหาร้าน</a></li>
+            <li><a href="#" onclick="showPage('contact')" data-page="contact">ติดต่อ</a></li>
+        </ul>
+        <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+    </div></nav>
+    <div class="page active" id="page-home"><section class="hero"><div class="hero-bg"></div><div class="hero-content">
+        <div class="hero-logo-wrap">
+            <img src="https://i.ibb.co/JjzcxZyL/Screenshot-2026-04-18-215658.png" alt="Re.Fresh Logo" class="hero-logo">
+            <div class="hero-badge">Premium Taste, Zero Waste</div>
         </div>
-    </nav>
-    <div class="page active" id="page-home">
-        <section class="hero">
-            <div class="hero-bg"></div>
-            <div class="hero-content">
-                <img src="https://i.ibb.co/JjzcxZyL/Screenshot-2026-04-18-215658.png" alt="Re.Fresh Logo" class="hero-logo">
-                <div class="hero-badge">🌱 Premium Taste, Zero Waste</div>
-                <h1 class="hero-title">สมูทตี้พรีเมียมเพื่อสุขภาพ<br>ที่เปลี่ยน <span class="highlight-orange">'ผลไม้เปลือกไม่สวย'</span><br>ให้เป็น <span class="highlight">ความอร่อยที่ยั่งยืน</span></h1>
-                <p class="hero-subtitle">Re.Fresh แบรนด์สมูทตี้พรีเมียมจากแนวคิดของนักศึกษา Gen Z ที่มุ่งมั่นสร้างสรรค์เครื่องดื่มเพื่อสุขภาพ พร้อมขับเคลื่อนสังคมสู่ความยั่งยืน</p>
-                <div class="hero-actions">
-                    <a href="#" onclick="showPage('article')" class="btn-primary">📖 อ่านเรื่องราวของเรา</a>
-                    <a href="#" onclick="showPage('menu')" class="btn-secondary">🛒 ดูเมนูสมูทตี้</a>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat-item"><div class="stat-number">30%+</div><div class="stat-label">ผลไม้ถูกทิ้งเพราะรูปลักษณ์</div></div>
-                    <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">ผลไม้สดใหม่ ไม่มีสารปรุงแต่ง</div></div>
-                    <div class="stat-item"><div class="stat-number">Zero</div><div class="stat-label">Waste Mission</div></div>
-                </div>
+        <h1 class="hero-title">สมูทตี้พรีเมียมเพื่อสุขภาพ<br>ที่เปลี่ยน <span class="highlight-orange">'ผลไม้เปลือกไม่สวย'</span><br>ให้เป็น <span class="highlight">ความอร่อยที่ยั่งยืน</span></h1>
+        <p class="hero-subtitle">Re.Fresh แบรนด์สมูทตี้พรีเมียมจากแนวคิดของนักศึกษา Gen Z ที่มุ่งมั่นสร้างสรรค์เครื่องดื่มเพื่อสุขภาพ พร้อมขับเคลื่อนสังคมสู่ความยั่งยืน</p>
+        <div class="hero-actions">
+            <a href="#" onclick="showPage('article')" class="btn-primary">📖 อ่านเรื่องราวของเรา</a>
+            <a href="#" onclick="showPage('menu')" class="btn-secondary">🛒 ดูเมนูสมูทตี้</a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-item"><div class="stat-number">30%+</div><div class="stat-label">ผลไม้ถูกทิ้งเพราะรูปลักษณ์</div></div>
+            <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">ผลไม้สดใหม่ ไม่มีสารปรุงแต่ง</div></div>
+            <div class="stat-item"><div class="stat-number">Zero</div><div class="stat-label">Waste Mission</div></div>
+        </div>
+    </div><svg class="hero-wave" viewBox="0 0 1440 100" preserveAspectRatio="none" style="height:80px;"><path d="M0,60 C360,100 1080,0 1440,60 L1440,100 L0,100 Z" fill="#F0F7F4"/></svg></section></div>
+    <div class="page" id="page-about"><div class="about-page"><div class="about-inner">
+        <div class="about-hero-text">
+            <img src="https://i.ibb.co/JjzcxZyL/Screenshot-2026-04-18-215658.png" alt="Re.Fresh" class="page-logo">
+            <h1>เกี่ยวกับ <span class="highlight">Re.Fresh</span></h1>
+            <p>Re.Fresh คือแบรนด์สมูทตี้พรีเมียมที่เกิดจากแนวคิดของนักศึกษา Gen Z เราเชื่อว่าผลไม้ทุกลูกมีคุณค่า ไม่ว่าเปลือกจะสวยหรือไม่</p>
+        </div>
+        <div class="about-cards">
+            <div class="about-card"><div class="card-emoji">🎯</div><h3>พันธกิจของเรา</h3><p>ลดปัญหา Food Waste โดยการนำผลไม้มีตำหนิมาแปรรูปเป็นสมูทตี้คุณภาพสูง พร้อมสนับสนุนเกษตรกรไทย</p></div>
+            <div class="about-card"><div class="card-emoji">💚</div><h3>วิสัยทัศน์</h3><p>เป็นแบรนด์สมูทตี้ชั้นนำที่ขับเคลื่อน Sustainable Development Goals และแนวคิด Zero Waste ในประเทศไทย</p></div>
+            <div class="about-card"><div class="card-emoji">🌱</div><h3>ค่านิยม</h3><p>ทุกแก้วที่คุณเลือก คือการแสดงออกถึงความใส่ใจต่อสุขภาพและสิ่งแวดล้อม</p></div>
+        </div>
+    </div></div></div>
+    <div class="page" id="page-menu"><div class="menu-page"><div class="menu-page-inner">
+        <div class="menu-page-header">
+            <img src="https://i.ibb.co/JjzcxZyL/Screenshot-2026-04-18-215658.png" alt="Re.Fresh" class="menu-page-logo">
+            <h1 class="menu-page-title">Our Menu</h1>
+            <p class="menu-page-sub">สมูทตี้พรีเมียม ผลไม้สด 100% ไม่มีน้ำเชื่อม ไม่มีสารปรุงแต่ง</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/C3pbsxCV/strawberry-bliss.png" alt="Strawberry Bliss" class="menu-card-img"></div><div class="menu-card-body"><h3>Strawberry Bliss</h3><p>สตรอว์เบอร์รี่สดผสมโยเกิร์ต</p><span class="price">฿89</span></div></div>
+            <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/TM27zmQz/mango-tango.png" alt="Mango Tango" class="menu-card-img"></div><div class="menu-card-body"><h3>Mango Tango</h3><p>มะม่วงสุกหวานฉ่ำ</p><span class="price">฿89</span></div></div>
+            <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/rfy5QcjX/blueberry-boost.png" alt="Blueberry Boost" class="menu-card-img"></div><div class="menu-card-body"><h3>Blueberry Boost</h3><p>บลูเบอร์รี่เข้มข้นอุดมสารอาหาร</p><span class="price">฿99</span></div></div>
+            <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/WWpg4yqN/fresh-kiwi.png" alt="Fresh Kiwi" class="menu-card-img"></div><div class="menu-card-body"><h3>Fresh Kiwi</h3><p>กีวี่สดเปรี้ยวหวานสดชื่น</p><span class="price">฿89</span></div></div>
+            <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/dsBq76TF/berry-delight.png" alt="Berry Delight" class="menu-card-img"></div><div class="menu-card-body"><h3>Berry Delight</h3><p>รวมเบอร์รี่ 3 ชนิด</p><span class="price">฿99</span></div></div>
+            <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/ymNLyV6S/cream-avocado.png" alt="Cream Avocado" class="menu-card-img"></div><div class="menu-card-body"><h3>Cream Avocado</h3><p>อะโวคาโดครีมมี่เข้มข้น</p><span class="price">฿109</span></div></div>
+            <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/QFXKqyVf/perfect-peach.png" alt="Perfect Peach" class="menu-card-img"></div><div class="menu-card-body"><h3>Perfect Peach</h3><p>พีชหวานฉ่ำสดชื่น</p><span class="price">฿89</span></div></div>
+            <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/qYjQ0tJv/acai-berry.png" alt="Acai Berry" class="menu-card-img"></div><div class="menu-card-body"><h3>Acai Berry</h3><p>อาซาอีเบอร์รี่ซุปเปอร์ฟู้ด</p><span class="price">฿119</span></div></div>
+            <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/Qv5h7YQ4/fresh-orange.png" alt="Fresh Orange" class="menu-card-img"></div><div class="menu-card-body"><h3>Fresh Orange</h3><p>ส้มคั้นสดวิตามินซีสูง</p><span class="price">฿65</span></div></div>
+                        <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/zVjF50y9/mint-choc.png" alt="Mint Chocolate" class="menu-card-img"></div><div class="menu-card-body"><h3>Mint Chocolate</h3><p>มินต์ช็อกโกแลตเย็นชื่นใจ</p><span class="price">฿99</span></div></div>
+            <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/G4NjMMvn/berry-yogurt.png" alt="Berry Yogurt" class="menu-card-img"></div><div class="menu-card-body"><h3>Berry Yogurt</h3><p>เบอร์รี่ผสมโยเกิร์ตสด</p><span class="price">฿99</span></div></div>
+            <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/hSKP1Tr/tropical-punch.png" alt="Tropical Punch" class="menu-card-img"></div><div class="menu-card-body"><h3>Tropical Punch</h3><p>รวมผลไม้เมืองร้อน</p><span class="price">฿89</span></div></div>
+            <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/0pZG6p27/pure-avocado.png" alt="Pure Avocado" class="menu-card-img"></div><div class="menu-card-body"><h3>Pure Avocado</h3><p>อะโวคาโดแท้ 100%</p><span class="price">฿109</span></div></div>
+            <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/zhQc0D8p/pure-berry.png" alt="Pure Berry" class="menu-card-img"></div><div class="menu-card-body"><h3>Pure Berry</h3><p>เบอร์รี่แท้เข้มข้น</p><span class="price">฿99</span></div></div>
+            <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/d4txF15R/cocoa-butter.png" alt="Cocoa Butter" class="menu-card-img"></div><div class="menu-card-body"><h3>Cocoa Butter</h3><p>โกโก้เนยถั่วเข้มข้น</p><span class="price">฿99</span></div></div>
+            <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/5W0YbYMZ/watermelon.png" alt="Watermelon" class="menu-card-img"></div><div class="menu-card-body"><h3>Watermelon</h3><p>แตงโมสดเย็นชื่นใจ</p><span class="price">฿60</span></div></div>
+        </div>
+    </div></div></div>
+    <div class="page" id="page-article"><div class="article-page"><div class="article-container">
+        <div class="article-hero">
+            <img src="https://i.ibb.co/JjzcxZyL/Screenshot-2026-04-18-215658.png" alt="Re.Fresh" class="article-hero-logo">
+            <h1>Re.Fresh: สมูทตี้พรีเมียมเพื่อสุขภาพ<br>ที่เปลี่ยน 'ผลไม้เปลือกไม่สวย' ให้เป็นความอร่อยที่ยั่งยืน</h1>
+            <p class="article-meta">📰 บทความ Re.Fresh &nbsp;|&nbsp; 🌱 Sustainability &nbsp;|&nbsp; 🕐 อ่าน 5 นาที</p>
+        </div>
+        <section class="article-section">
+            <div class="section-header"><div class="section-icon orange">🗑️</div><div><h2 class="section-title">ปัญหา Food Waste สู่แรงบันดาลใจของ Re.Fresh</h2><p class="section-subtitle">เมื่อขยะอาหารกลายเป็นโอกาส</p></div></div>
+            <div class="article-text">
+                <p>ในโลกที่เต็มไปด้วยความเร่งรีบและผู้คนหันมาใส่ใจสุขภาพมากขึ้น การเลือกรับประทานอาหารและเครื่องดื่มที่มีประโยชน์จึงเป็นสิ่งสำคัญ แต่ในขณะเดียวกัน <strong>ปัญหาขยะอาหาร (Food Waste)</strong> ก็เป็นอีกหนึ่งประเด็นใหญ่ที่ส่งผลกระทบต่อสิ่งแวดล้อมอย่างมหาศาล</p>
+                <div class="highlight-box"><p><strong>Re.Fresh</strong> แบรนด์สมูทตี้พรีเมียมจากแนวคิดของนักศึกษา Gen Z ได้ถือกำเนิดขึ้นเพื่อตอบโจทย์ทั้งสองด้านนี้ ด้วยความมุ่งมั่นที่จะสร้างสรรค์เครื่องดื่มเพื่อสุขภาพที่อร่อย สดชื่น และเป็นส่วนหนึ่งในการขับเคลื่อนสังคมสู่ความยั่งยืน</p></div>
             </div>
-            <svg class="hero-wave" viewBox="0 0 1440 100" preserveAspectRatio="none" style="height:80px;"><path d="M0,60 C360,100 1080,0 1440,60 L1440,100 L0,100 Z" fill="#F0F7F4"/></svg>
         </section>
-    </div>
-    <div class="page" id="page-about">
-        <div class="about-page"><div class="about-inner">
-            <div class="about-hero-text">
-                <img src="https://i.ibb.co/JjzcxZyL/Screenshot-2026-04-18-215658.png" alt="Re.Fresh" class="page-logo">
-                <h1>เกี่ยวกับ <span class="highlight">Re.Fresh</span></h1>
-                <p>Re.Fresh คือแบรนด์สมูทตี้พรีเมียมที่เกิดจากแนวคิดของนักศึกษา Gen Z เราเชื่อว่าผลไม้ทุกลูกมีคุณค่า ไม่ว่าเปลือกจะสวยหรือไม่</p>
+        <section class="article-section">
+            <div class="section-header"><div class="section-icon green">🍊</div><div><h2 class="section-title">Ugly is Tasty</h2><p class="section-subtitle">เมื่อความสวยงามไม่ใช่สิ่งสำคัญที่สุด</p></div></div>
+            <div class="article-text">
+                <p>หัวใจหลักของ Re.Fresh คือการนำ <strong>"ผลไม้เกรด A ที่เปลือกไม่สวย"</strong> หรือผลไม้ที่มีตำหนิภายนอกเล็กน้อย มาแปรรูปเป็นสมูทตี้คุณภาพสูง ด้วยรสชาติที่อร่อยล้ำและคุณค่าทางโภชนาการครบถ้วน</p><br>
+                <p>ผลไม้กว่า <span class="stat-highlight">30%</span> ถูกคัดทิ้งจากตลาดเพียงเพราะรูปลักษณ์ภายนอกไม่สวยงาม</p><br>
+                <p>แนวคิด "Ugly is Tasty" ไม่เพียงแต่ช่วยลดปริมาณขยะอาหารได้อย่างเป็นรูปธรรม แต่ยังเป็นการสนับสนุนเกษตรกรไทยให้มีช่องทางจำหน่ายผลผลิตได้ครบวงจรมากขึ้น โดย<strong>ไม่ตัดสินคุณค่าของผลไม้จากรูปลักษณ์ภายนอก</strong></p>
             </div>
-            <div class="about-cards">
-                <div class="about-card"><div class="card-emoji">🎯</div><h3>พันธกิจของเรา</h3><p>ลดปัญหา Food Waste โดยการนำผลไม้มีตำหนิมาแปรรูปเป็นสมูทตี้คุณภาพสูง พร้อมสนับสนุนเกษตรกรไทย</p></div>
-                <div class="about-card"><div class="card-emoji">💚</div><h3>วิสัยทัศน์</h3><p>เป็นแบรนด์สมูทตี้ชั้นนำที่ขับเคลื่อน Sustainable Development Goals และแนวคิด Zero Waste ในประเทศไทย</p></div>
-                <div class="about-card"><div class="card-emoji">🌱</div><h3>ค่านิยม</h3><p>ทุกแก้วที่คุณเลือก คือการแสดงออกถึงความใส่ใจต่อสุขภาพและสิ่งแวดล้อม</p></div>
+        </section>
+        <section class="article-section">
+            <div class="section-header"><div class="section-icon blue">💎</div><div><h2 class="section-title">มากกว่าสมูทตี้ แต่คือการลงทุนเพื่อสุขภาพและโลกของเรา</h2><p class="section-subtitle">คุณค่าที่ Re.Fresh มอบให้</p></div></div>
+            <div class="feature-grid">
+                <div class="feature-card"><div class="card-emoji">🥤</div><h3>สมูทตี้เพื่อสุขภาพ</h3><p>คัดสรรผลไม้สดใหม่ 100% ปราศจากน้ำเชื่อมและสารปรุงแต่ง เน้นคุณค่าทางโภชนาการที่ครบถ้วน เหมาะสำหรับผู้ที่ต้องการดูแลรูปร่างและรักษาสุขภาพในระยะยาว</p></div>
+                <div class="feature-card"><div class="card-emoji">🍌</div><h3>สมูทตี้ผลไม้มีตำหนิ</h3><p>พิสูจน์ให้เห็นว่าผลไม้ที่มีตำหนิภายนอกก็สามารถมอบรสชาติที่ยอดเยี่ยมและสะอาดปลอดภัยได้ โดยยังคงคุณภาพและสารอาหารไว้อย่างเต็มเปี่ยม</p></div>
+                <div class="feature-card"><div class="card-emoji">🌍</div><h3>แรงบันดาลใจเพื่อโลก</h3><p>Re.Fresh ไม่ได้มีแค่สมูทตี้ แต่ยังเป็นแรงบันดาลใจให้ผู้คนหันมาใส่ใจการเลือกวัตถุดิบธรรมชาติ และเข้าใจถึงคุณค่าของผลไม้ที่อาจถูกมองข้ามไป</p></div>
             </div>
-        </div></div>
-    </div>
-    <div class="page" id="page-menu">
-        <div class="menu-page"><div class="menu-page-inner">
-            <div class="menu-page-header">
-                <img src="https://i.ibb.co/JjzcxZyL/Screenshot-2026-04-18-215658.png" alt="Re.Fresh" class="menu-page-logo">
-                <h1 class="menu-page-title">Our Menu</h1>
-                <p class="menu-page-sub">สมูทตี้พรีเมียม ผลไม้สด 100% ไม่มีน้ำเชื่อม ไม่มีสารปรุงแต่ง</p>
+        </section>
+        <section class="quote-section article-section">
+            <p class="quote-text">"Cutting food waste is a delicious way of saving money, helping to feed the world and protect the planet."</p>
+            <p class="quote-author">Tristram Stuart</p>
+            <p class="quote-role">นักรณรงค์เรื่อง Food Waste ชื่อดัง</p>
+        </section>
+        <section class="article-section">
+            <div class="section-header"><div class="section-icon purple">🤝</div><div><h2 class="section-title">ร่วมเป็นส่วนหนึ่งของการเปลี่ยนแปลงกับ Re.Fresh</h2></div></div>
+            <div class="article-text">
+                <p>Re.Fresh เชื่อว่า<strong>การเลือกซื้อสินค้าแต่ละครั้งคือการแสดงออกถึงตัวตนและค่านิยมของผู้บริโภค</strong> การสนับสนุน Re.Fresh จึงไม่ใช่แค่การได้ดื่มสมูทตี้อร่อยๆ แต่ยังเป็นการร่วมขับเคลื่อน<strong>เป้าหมายการพัฒนาที่ยั่งยืน (SDGs)</strong> และแนวคิด <strong>Zero Waste</strong></p><br>
+                <p>ไม่ว่าคุณจะเป็นนักศึกษา Gen Z ที่ใส่ใจสิ่งแวดล้อม หรือคนรักสุขภาพที่มองหาเครื่องดื่มคุณภาพดี Re.Fresh พร้อมมอบประสบการณ์ความสดชื่นที่แตกต่างและสร้างสรรค์ให้กับคุณ</p>
             </div>
-            <div class="menu-grid">
-                <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/C3pbsxCV/strawberry-bliss.png" alt="Strawberry Bliss" class="menu-card-img"></div><div class="menu-card-body"><h3>Strawberry Bliss</h3><p>สตรอว์เบอร์รี่สดผสมโยเกิร์ต</p><span class="price">฿89</span></div></div>
-                <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/TM27zmQz/mango-tango.png" alt="Mango Tango" class="menu-card-img"></div><div class="menu-card-body"><h3>Mango Tango</h3><p>มะม่วงสุกหวานฉ่ำ</p><span class="price">฿89</span></div></div>
-                <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/rfy5QcjX/blueberry-boost.png" alt="Blueberry Boost" class="menu-card-img"></div><div class="menu-card-body"><h3>Blueberry Boost</h3><p>บลูเบอร์รี่เข้มข้นอุดมสารอาหาร</p><span class="price">฿99</span></div></div>
-                <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/WWpg4yqN/fresh-kiwi.png" alt="Fresh Kiwi" class="menu-card-img"></div><div class="menu-card-body"><h3>Fresh Kiwi</h3><p>กีวี่สดเปรี้ยวหวานสดชื่น</p><span class="price">฿89</span></div></div>
-                <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/dsBq76TF/berry-delight.png" alt="Berry Delight" class="menu-card-img"></div><div class="menu-card-body"><h3>Berry Delight</h3><p>รวมเบอร์รี่ 3 ชนิด</p><span class="price">฿99</span></div></div>
-                <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/ymNLyV6S/cream-avocado.png" alt="Cream Avocado" class="menu-card-img"></div><div class="menu-card-body"><h3>Cream Avocado</h3><p>อะโวคาโดครีมมี่เข้มข้น</p><span class="price">฿109</span></div></div>
-                <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/QFXKqyVf/perfect-peach.png" alt="Perfect Peach" class="menu-card-img"></div><div class="menu-card-body"><h3>Perfect Peach</h3><p>พีชหวานฉ่ำสดชื่น</p><span class="price">฿89</span></div></div>
-                <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/qYjQ0tJv/acai-berry.png" alt="Acai Berry" class="menu-card-img"></div><div class="menu-card-body"><h3>Acai Berry</h3><p>อาซาอีเบอร์รี่ซุปเปอร์ฟู้ด</p><span class="price">฿119</span></div></div>
-                <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/Qv5h7YQ4/fresh-orange.png" alt="Fresh Orange" class="menu-card-img"></div><div class="menu-card-body"><h3>Fresh Orange</h3><p>ส้มคั้นสดวิตามินซีสูง</p><span class="price">฿65</span></div></div>
-                                <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/zVjF50y9/mint-choc.png" alt="Mint Chocolate" class="menu-card-img"></div><div class="menu-card-body"><h3>Mint Chocolate</h3><p>มินต์ช็อกโกแลตเย็นชื่นใจ</p><span class="price">฿99</span></div></div>
-                <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/G4NjMMvn/berry-yogurt.png" alt="Berry Yogurt" class="menu-card-img"></div><div class="menu-card-body"><h3>Berry Yogurt</h3><p>เบอร์รี่ผสมโยเกิร์ตสด</p><span class="price">฿99</span></div></div>
-                <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/hSKP1Tr/tropical-punch.png" alt="Tropical Punch" class="menu-card-img"></div><div class="menu-card-body"><h3>Tropical Punch</h3><p>รวมผลไม้เมืองร้อน</p><span class="price">฿89</span></div></div>
-                <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/0pZG6p27/pure-avocado.png" alt="Pure Avocado" class="menu-card-img"></div><div class="menu-card-body"><h3>Pure Avocado</h3><p>อะโวคาโดแท้ 100%</p><span class="price">฿109</span></div></div>
-                <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/zhQc0D8p/pure-berry.png" alt="Pure Berry" class="menu-card-img"></div><div class="menu-card-body"><h3>Pure Berry</h3><p>เบอร์รี่แท้เข้มข้น</p><span class="price">฿99</span></div></div>
-                <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/d4txF15R/cocoa-butter.png" alt="Cocoa Butter" class="menu-card-img"></div><div class="menu-card-body"><h3>Cocoa Butter</h3><p>โกโก้เนยถั่วเข้มข้น</p><span class="price">฿99</span></div></div>
-                <div class="menu-card"><div class="menu-card-img-wrap"><img src="https://i.ibb.co/5W0YbYMZ/watermelon.png" alt="Watermelon" class="menu-card-img"></div><div class="menu-card-body"><h3>Watermelon</h3><p>แตงโมสดเย็นชื่นใจ</p><span class="price">฿60</span></div></div>
-            </div>
-        </div></div>
-    </div>
-    <div class="page" id="page-article">
-        <div class="article-page"><div class="article-container">
-            <div class="article-hero">
-                <img src="https://i.ibb.co/JjzcxZyL/Screenshot-2026-04-18-215658.png" alt="Re.Fresh" class="article-hero-logo">
-                <h1>Re.Fresh: สมูทตี้พรีเมียมเพื่อสุขภาพ<br>ที่เปลี่ยน 'ผลไม้เปลือกไม่สวย' ให้เป็นความอร่อยที่ยั่งยืน</h1>
-                <p class="article-meta">📰 บทความ Re.Fresh &nbsp;|&nbsp; 🌱 Sustainability &nbsp;|&nbsp; 🕐 อ่าน 5 นาที</p>
-            </div>
-            <section class="article-section">
-                <div class="section-header"><div class="section-icon orange">🗑️</div><div><h2 class="section-title">ปัญหา Food Waste สู่แรงบันดาลใจของ Re.Fresh</h2><p class="section-subtitle">เมื่อขยะอาหารกลายเป็นโอกาส</p></div></div>
-                <div class="article-text">
-                    <p>ในโลกที่เต็มไปด้วยความเร่งรีบและผู้คนหันมาใส่ใจสุขภาพมากขึ้น การเลือกรับประทานอาหารและเครื่องดื่มที่มีประโยชน์จึงเป็นสิ่งสำคัญ แต่ในขณะเดียวกัน <strong>ปัญหาขยะอาหาร (Food Waste)</strong> ก็เป็นอีกหนึ่งประเด็นใหญ่ที่ส่งผลกระทบต่อสิ่งแวดล้อมอย่างมหาศาล</p>
-                    <div class="highlight-box"><p><strong>Re.Fresh</strong> แบรนด์สมูทตี้พรีเมียมจากแนวคิดของนักศึกษา Gen Z ได้ถือกำเนิดขึ้นเพื่อตอบโจทย์ทั้งสองด้านนี้ ด้วยความมุ่งมั่นที่จะสร้างสรรค์เครื่องดื่มเพื่อสุขภาพที่อร่อย สดชื่น และเป็นส่วนหนึ่งในการขับเคลื่อนสังคมสู่ความยั่งยืน</p></div>
-                </div>
-            </section>
-            <section class="article-section">
-                <div class="section-header"><div class="section-icon green">🍊</div><div><h2 class="section-title">Ugly is Tasty</h2><p class="section-subtitle">เมื่อความสวยงามไม่ใช่สิ่งสำคัญที่สุด</p></div></div>
-                <div class="article-text">
-                    <p>หัวใจหลักของ Re.Fresh คือการนำ <strong>"ผลไม้เกรด A ที่เปลือกไม่สวย"</strong> หรือผลไม้ที่มีตำหนิภายนอกเล็กน้อย มาแปรรูปเป็นสมูทตี้คุณภาพสูง ด้วยรสชาติที่อร่อยล้ำและคุณค่าทางโภชนาการครบถ้วน</p><br>
-                    <p>ผลไม้กว่า <span class="stat-highlight">30%</span> ถูกคัดทิ้งจากตลาดเพียงเพราะรูปลักษณ์ภายนอกไม่สวยงาม</p><br>
-                    <p>แนวคิด "Ugly is Tasty" ไม่เพียงแต่ช่วยลดปริมาณขยะอาหารได้อย่างเป็นรูปธรรม แต่ยังเป็นการสนับสนุนเกษตรกรไทยให้มีช่องทางจำหน่ายผลผลิตได้ครบวงจรมากขึ้น โดย<strong>ไม่ตัดสินคุณค่าของผลไม้จากรูปลักษณ์ภายนอก</strong></p>
-                </div>
-            </section>
-            <section class="article-section">
-                <div class="section-header"><div class="section-icon blue">💎</div><div><h2 class="section-title">มากกว่าสมูทตี้ แต่คือการลงทุนเพื่อสุขภาพและโลกของเรา</h2><p class="section-subtitle">คุณค่าที่ Re.Fresh มอบให้</p></div></div>
-                <div class="feature-grid">
-                    <div class="feature-card"><div class="card-emoji">🥤</div><h3>สมูทตี้เพื่อสุขภาพ</h3><p>คัดสรรผลไม้สดใหม่ 100% ปราศจากน้ำเชื่อมและสารปรุงแต่ง เน้นคุณค่าทางโภชนาการที่ครบถ้วน เหมาะสำหรับผู้ที่ต้องการดูแลรูปร่างและรักษาสุขภาพในระยะยาว</p></div>
-                    <div class="feature-card"><div class="card-emoji">🍌</div><h3>สมูทตี้ผลไม้มีตำหนิ</h3><p>พิสูจน์ให้เห็นว่าผลไม้ที่มีตำหนิภายนอกก็สามารถมอบรสชาติที่ยอดเยี่ยมและสะอาดปลอดภัยได้ โดยยังคงคุณภาพและสารอาหารไว้อย่างเต็มเปี่ยม</p></div>
-                    <div class="feature-card"><div class="card-emoji">🌍</div><h3>แรงบันดาลใจเพื่อโลก</h3><p>Re.Fresh ไม่ได้มีแค่สมูทตี้ แต่ยังเป็นแรงบันดาลใจให้ผู้คนหันมาใส่ใจการเลือกวัตถุดิบธรรมชาติ และเข้าใจถึงคุณค่าของผลไม้ที่อาจถูกมองข้ามไป</p></div>
-                </div>
-            </section>
-            <section class="quote-section article-section">
-                <p class="quote-text">"Cutting food waste is a delicious way of saving money, helping to feed the world and protect the planet."</p>
-                <p class="quote-author">Tristram Stuart</p>
-                <p class="quote-role">นักรณรงค์เรื่อง Food Waste ชื่อดัง</p>
-            </section>
-            <section class="article-section">
-                <div class="section-header"><div class="section-icon purple">🤝</div><div><h2 class="section-title">ร่วมเป็นส่วนหนึ่งของการเปลี่ยนแปลงกับ Re.Fresh</h2></div></div>
-                <div class="article-text">
-                    <p>Re.Fresh เชื่อว่า<strong>การเลือกซื้อสินค้าแต่ละครั้งคือการแสดงออกถึงตัวตนและค่านิยมของผู้บริโภค</strong> การสนับสนุน Re.Fresh จึงไม่ใช่แค่การได้ดื่มสมูทตี้อร่อยๆ แต่ยังเป็นการร่วมขับเคลื่อน<strong>เป้าหมายการพัฒนาที่ยั่งยืน (SDGs)</strong> และแนวคิด <strong>Zero Waste</strong></p><br>
-                    <p>ไม่ว่าคุณจะเป็นนักศึกษา Gen Z ที่ใส่ใจสิ่งแวดล้อม หรือคนรักสุขภาพที่มองหาเครื่องดื่มคุณภาพดี Re.Fresh พร้อมมอบประสบการณ์ความสดชื่นที่แตกต่างและสร้างสรรค์ให้กับคุณ</p>
-                </div>
-                <div class="tags-container">
-                    <span class="tag">#ReFresh</span><span class="tag orange">#UglyIsTasty</span><span class="tag">#ZeroWaste</span><span class="tag">#สมูทตี้เพื่อสุขภาพ</span><span class="tag orange">#สมูทตี้ผลไม้มีตำหนิ</span><span class="tag">#น้ำผลไม้ปั่นสยาม</span><span class="tag">#สมูทตี้ไม่อ้วน</span><span class="tag orange">#สุขภาพดี</span><span class="tag">#ลดFoodWaste</span><span class="tag">#GenZ</span><span class="tag orange">#Sustainability</span>
-                </div>
-            </section>
-            <section class="cta-section article-section">
-                <h2>🌿 พร้อมลิ้มลองความสดชื่นที่ยั่งยืนแล้วหรือยัง?</h2>
-                <p>ทุกแก้วที่คุณเลือก คือการช่วยลด Food Waste และสนับสนุนเกษตรกรไทย</p>
-                <a href="#" onclick="showPage('menu')" class="btn-primary">🥤 ดูเมนูสมูทตี้</a>
-            </section>
-        </div></div>
-    </div>
-    <div class="page" id="page-find">
-        <div class="find-page"><div class="find-inner">
-            <img src="https://i.ibb.co/JjzcxZyL/Screenshot-2026-04-18-215658.png" alt="Re.Fresh" class="page-logo">
-            <h1>Find a Re.Fresh Smoothie</h1>
-            <p class="find-sub">"Rescue the fruit. Refresh the world."</p>
-            <div class="find-search-box"><input type="text" placeholder="ค้นหาด้วยรหัสไปรษณีย์หรือที่อยู่..."><button>ค้นหา</button></div>
-            <button class="use-location">📍 ใช้ตำแหน่งปัจจุบัน</button>
-            <div class="find-map-placeholder">🗺️ แผนที่จะแสดงผลที่นี่</div>
-        </div></div>
-    </div>
-    <div class="page" id="page-contact">
-        <div class="contact-page"><div class="contact-inner">
-            <img src="https://i.ibb.co/JjzcxZyL/Screenshot-2026-04-18-215658.png" alt="Re.Fresh" class="page-logo">
-            <h1>ติดต่อเรา</h1>
-            <p style="color:#555;margin-bottom:1rem;">ติดตามข่าวสารและเมนูพิเศษของ Re.Fresh ได้ทุกช่องทาง</p>
-            <div class="contact-cards">
-                <a href="https://facebook.com/Refresh.Thailand" target="_blank" style="text-decoration:none;"><div class="contact-card"><div class="social-icon facebook"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" style="filter:brightness(0) invert(1);"></div><div class="c-info"><h3>Facebook</h3><p>Refresh.Thailand</p></div></div></a>
-                <a href="https://instagram.com/Refresh.Thailand" target="_blank" style="text-decoration:none;"><div class="contact-card"><div class="social-icon instagram"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" style="filter:brightness(0) invert(1);"></div><div class="c-info"><h3>Instagram</h3><p>Refresh.Thailand</p></div></div></a>
-                <a href="https://tiktok.com/@Refresh.Thailand" target="_blank" style="text-decoration:none;"><div class="contact-card"><div class="social-icon tiktok"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok" style="filter:brightness(0) invert(1);"></div><div class="c-info"><h3>TikTok</h3><p>Refresh.Thailand</p></div></div></a>
-                <a href="https://line.me/R/ti/p/@ReFreshTH" target="_blank" style="text-decoration:none;"><div class="contact-card"><div class="social-icon line"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/line.svg" alt="LINE" style="filter:brightness(0) invert(1);"></div><div class="c-info"><h3>LINE Official</h3><p>@ReFreshTH</p></div></div></a>
-                <a href="mailto:hello@refresh-thailand.com" style="text-decoration:none;"><div class="contact-card"><div class="social-icon email"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail"></div><div class="c-info"><h3>Email</h3><p>hello@refresh-thailand.com</p></div></div></a>
-            </div>
-        </div></div>
-    </div>
+            <div class="tags-container"><span class="tag">#ReFresh</span><span class="tag orange">#UglyIsTasty</span><span class="tag">#ZeroWaste</span><span class="tag">#สมูทตี้เพื่อสุขภาพ</span><span class="tag orange">#สมูทตี้ผลไม้มีตำหนิ</span><span class="tag">#น้ำผลไม้ปั่นสยาม</span><span class="tag">#สมูทตี้ไม่อ้วน</span><span class="tag orange">#สุขภาพดี</span><span class="tag">#ลดFoodWaste</span><span class="tag">#GenZ</span><span class="tag orange">#Sustainability</span></div>
+        </section>
+        <section class="cta-section article-section">
+            <h2>🌿 พร้อมลิ้มลองความสดชื่นที่ยั่งยืนแล้วหรือยัง?</h2>
+            <p>ทุกแก้วที่คุณเลือก คือการช่วยลด Food Waste และสนับสนุนเกษตรกรไทย</p>
+            <a href="#" onclick="showPage('menu')" class="btn-primary">🥤 ดูเมนูสมูทตี้</a>
+        </section>
+    </div></div></div>
+    <div class="page" id="page-find"><div class="find-page"><div class="find-inner">
+        <img src="https://i.ibb.co/JjzcxZyL/Screenshot-2026-04-18-215658.png" alt="Re.Fresh" class="page-logo">
+        <h1>Find a Re.Fresh Smoothie</h1>
+        <p class="find-sub">"Rescue the fruit. Refresh the world."</p>
+        <div class="find-search-box"><input type="text" placeholder="ค้นหาด้วยรหัสไปรษณีย์หรือที่อยู่..."><button>ค้นหา</button></div>
+        <button class="use-location">📍 ใช้ตำแหน่งปัจจุบัน</button>
+        <div class="find-map-placeholder">🗺️ แผนที่จะแสดงผลที่นี่</div>
+    </div></div></div>
+    <div class="page" id="page-contact"><div class="contact-page"><div class="contact-inner">
+        <img src="https://i.ibb.co/JjzcxZyL/Screenshot-2026-04-18-215658.png" alt="Re.Fresh" class="page-logo">
+        <h1>ติดต่อเรา</h1>
+        <p style="color:#555;margin-bottom:1rem;">ติดตามข่าวสารและเมนูพิเศษของ Re.Fresh ได้ทุกช่องทาง</p>
+        <div class="contact-cards">
+            <a href="https://facebook.com/Refresh.Thailand" target="_blank" style="text-decoration:none;"><div class="contact-card"><div class="social-icon facebook"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" style="filter:brightness(0) invert(1);"></div><div class="c-info"><h3>Facebook</h3><p>Refresh.Thailand</p></div></div></a>
+            <a href="https://instagram.com/Refresh.Thailand" target="_blank" style="text-decoration:none;"><div class="contact-card"><div class="social-icon instagram"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" style="filter:brightness(0) invert(1);"></div><div class="c-info"><h3>Instagram</h3><p>Refresh.Thailand</p></div></div></a>
+            <a href="https://tiktok.com/@Refresh.Thailand" target="_blank" style="text-decoration:none;"><div class="contact-card"><div class="social-icon tiktok"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok" style="filter:brightness(0) invert(1);"></div><div class="c-info"><h3>TikTok</h3><p>Refresh.Thailand</p></div></div></a>
+            <a href="https://line.me/R/ti/p/@ReFreshTH" target="_blank" style="text-decoration:none;"><div class="contact-card"><div class="social-icon line"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/line.svg" alt="LINE" style="filter:brightness(0) invert(1);"></div><div class="c-info"><h3>LINE Official</h3><p>@ReFreshTH</p></div></div></a>
+            <a href="mailto:hello@refresh-thailand.com" style="text-decoration:none;"><div class="contact-card"><div class="social-icon email"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail"></div><div class="c-info"><h3>Email</h3><p>hello@refresh-thailand.com</p></div></div></a>
+        </div>
+    </div></div></div>
     <footer>
         <img src="https://i.ibb.co/JjzcxZyL/Screenshot-2026-04-18-215658.png" alt="Re.Fresh" class="footer-logo-img">
         <p>สมูทตี้พรีเมียมเพื่อสุขภาพ | Ugly is Tasty</p>
@@ -378,22 +309,17 @@
             <a href="mailto:hello@refresh-thailand.com" class="em"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail"></a>
         </div>
         <div class="footer-links">
-            <a href="#" onclick="showPage('home')">หน้าแรก</a>
-            <a href="#" onclick="showPage('about')">เกี่ยวกับ</a>
-            <a href="#" onclick="showPage('menu')">เมนู</a>
-            <a href="#" onclick="showPage('article')">บทความ</a>
-            <a href="#" onclick="showPage('find')">ค้นหาร้าน</a>
-            <a href="#" onclick="showPage('contact')">ติดต่อ</a>
+            <a href="#" onclick="showPage('home')">หน้าแรก</a><a href="#" onclick="showPage('about')">เกี่ยวกับ</a><a href="#" onclick="showPage('menu')">เมนู</a><a href="#" onclick="showPage('article')">บทความ</a><a href="#" onclick="showPage('find')">ค้นหาร้าน</a><a href="#" onclick="showPage('contact')">ติดต่อ</a>
         </div>
         <p class="footer-copy">© 2026 COPYRIGHT RE.FRESH – THAILAND | TERMS & CONDITIONS | PRIVACY</p>
     </footer>
     <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
     <script>
-        function showPage(pageName){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));const t=document.getElementById('page-'+pageName);if(t)t.classList.add('active');document.querySelectorAll('.nav-links a[data-page]').forEach(a=>{a.classList.remove('active-link');if(a.getAttribute('data-page')===pageName)a.classList.add('active-link');});window.scrollTo({top:0,behavior:'smooth'});document.getElementById('navLinks').classList.remove('active');if(pageName==='article'){setTimeout(()=>{document.querySelectorAll('#page-article .article-section').forEach(s=>observer.observe(s));},100);}}
-        function toggleMenu(){document.getElementById('navLinks').classList.toggle('active');}
-        document.querySelectorAll('.nav-links a').forEach(link=>{link.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('active'));});
-        window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);document.getElementById('scrollTop').classList.toggle('show',window.scrollY>500);const h=document.documentElement.scrollHeight-document.documentElement.clientHeight;document.getElementById('readingProgress').style.width=(h>0?(document.documentElement.scrollTop/h)*100:0)+'%';});
-        const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible');});},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+        function showPage(p){document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));var t=document.getElementById('page-'+p);if(t)t.classList.add('active');document.querySelectorAll('.nav-links a[data-page]').forEach(a=>{a.classList.remove('active-link');if(a.getAttribute('data-page')===p)a.classList.add('active-link')});window.scrollTo({top:0,behavior:'smooth'});document.getElementById('navLinks').classList.remove('active');if(p==='article')setTimeout(()=>{document.querySelectorAll('#page-article .article-section').forEach(s=>observer.observe(s))},100)}
+        function toggleMenu(){document.getElementById('navLinks').classList.toggle('active')}
+        document.querySelectorAll('.nav-links a').forEach(l=>{l.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('active'))});
+        window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);document.getElementById('scrollTop').classList.toggle('show',window.scrollY>500);var h=document.documentElement.scrollHeight-document.documentElement.clientHeight;document.getElementById('readingProgress').style.width=(h>0?(document.documentElement.scrollTop/h)*100:0)+'%'});
+        var observer=new IntersectionObserver(e=>{e.forEach(n=>{if(n.isIntersecting)n.target.classList.add('visible')})},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
         document.querySelectorAll('.article-section').forEach(s=>observer.observe(s));
     </script>
 </body>
